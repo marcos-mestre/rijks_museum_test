@@ -13,5 +13,5 @@ import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
 @SelectPackages("com.mmestre.rijksmuseum")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = FEATURES_PROPERTY_NAME, value = "src/test/features")
-public class RunCucumberTest {
+public class RunCucumberIT {
 }
