@@ -2,9 +2,12 @@ package com.mmestre.steps;
 
 import com.mmestre.client.CollectionClient;
 import com.mmestre.client.CollectionDetailsClient;
+import com.mmestre.client.CollectionImageClient;
 import com.mmestre.model.CollectionDetailsResponse;
+import com.mmestre.model.CollectionImageResponse;
 import com.mmestre.model.CollectionResponse;
 import io.cucumber.java.en.Then;
+import io.restassured.mapper.ObjectMapperType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.function.Executable;
 
@@ -32,5 +35,15 @@ public class ValidationSteps {
         CollectionDetailsResponse collectionDetailsResponse = response.as(CollectionDetailsResponse.class);
         assertNotNull(collectionDetailsResponse.getArtObject(), "The response didn't include any art object.");
         assertEquals(expectedId, collectionDetailsResponse.getArtObject().getObjectNumber(), "The art object number doesn't match.");
+    }
+
+    @Then("I receive a collection image response with at least {int} image(s)")
+    public void minimumImagesReceived(int minimumImages) {
+        Response response = CollectionImageClient.getResponse();
+        CollectionImageResponse collectionImageResponse = response.as(CollectionImageResponse.class, ObjectMapperType.GSON);
+        assertNotNull(collectionImageResponse, "The response couldn't been parsed to the CollectionImageResponse class.");
+        assertNotNull(collectionImageResponse.getLevels(), "Then response didn't return a list of levels");
+        int imagesReceived = collectionImageResponse.getLevels().size();
+        assertTrue(imagesReceived >= minimumImages, String.format("The images received (%s) should be at least %s.", imagesReceived, minimumImages));
     }
 }
