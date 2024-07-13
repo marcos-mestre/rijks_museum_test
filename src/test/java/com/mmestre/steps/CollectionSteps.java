@@ -2,6 +2,7 @@ package com.mmestre.steps;
 
 import com.mmestre.client.CollectionClient;
 import com.mmestre.client.CollectionDetailsClient;
+import com.mmestre.client.CollectionImageClient;
 import io.cucumber.java.en.Given;
 
 import java.util.Map;
@@ -17,5 +18,11 @@ public class CollectionSteps {
     public void collectionDetailsById(String id) {
         Map<String, String> parameters = Map.of();
         new CollectionDetailsClient().queryCollectionDetails("nl", id, parameters);
+    }
+
+    @Given("I send a Collection image request for the object {word}")
+    public void collectionImageById(String id) {
+        Map<String, String> parameters = Map.of();
+        new CollectionImageClient().queryCollectionDetails("nl", id, parameters);
     }
 }
