@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ValidationSteps {
-    @Then("all the artObjects must be made by {string}")
+    @Then("all the artObjects received in the Collection Response must be made by {string}")
     public void artObjectsMatchesMaker(String expectedMaker) {
         Response response = CollectionClient.getResponse();
         CollectionResponse collectionResponse = response.as(CollectionResponse.class);
@@ -29,7 +29,7 @@ public class ValidationSteps {
         assertAll("Not all the art objects matches the expected maker.", assertions);
     }
 
-    @Then("I receive one object with the id {word}")
+    @Then("I receive a CollectionDetails response for one object with the id {word}")
     public void artObjectMatchesId(String expectedId) {
         Response response = CollectionDetailsClient.getResponse();
         CollectionDetailsResponse collectionDetailsResponse = response.as(CollectionDetailsResponse.class);

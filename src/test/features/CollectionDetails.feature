@@ -4,4 +4,4 @@ Feature: Collection Details API
 
   Scenario: requesting the collection details from an art object will retrieve more details on that
     Given I send a Collection details request for the object SK-C-5
-    Then I receive one object with the id SK-C-5
+    Then I receive a CollectionDetails response for one object with the id SK-C-5
