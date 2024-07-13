@@ -7,4 +7,4 @@ Feature: Collection API
 
   Scenario: requesting the collection using a specific involvedMaker will return objects only from the chosen agent
     Given I send a Collection request with the involvedMaker Rembrandt+van+Rijn
-    Then all the artObjects must be made by "Rembrandt van Rijn"
+    Then all the artObjects received in the Collection Response must be made by "Rembrandt van Rijn"
