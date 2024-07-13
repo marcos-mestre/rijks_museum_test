@@ -11,10 +11,18 @@ import java.util.Map;
 class RestClient {
     protected static final String key = "14plFUIH";
     private static final String baseUrl = "https://www.rijksmuseum.nl";
+    private static volatile boolean initiated;
 
     protected RestClient() {
-        RestAssured.baseURI = baseUrl;
-        RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
+        if (!initiated) {
+            synchronized (this) {
+                if (!initiated) {
+                    RestAssured.baseURI = baseUrl;
+                    RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
+                }
+            }
+        }
+        initiated = true;
     }
 
     protected RequestSpecification getReqSpecification() {
