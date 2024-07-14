@@ -22,6 +22,8 @@
         <java.version>17</java.version>
         <maven.compiler.version>3.13.0</maven.compiler.version>
         <maven.surefire.version>3.2.5</maven.surefire.version>
+        <maven.jar.version>3.3.0</maven.jar.version>
+        <maven.install.version>3.1.1</maven.install.version>
     </properties>
 
     <dependencyManagement>
@@ -120,6 +122,29 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven.jar.version}</version>
+                <executions>
+                    <execution>
+                        <id>default-jar</id>
+                        <phase>none</phase>
+                        <configuration>
+                            <finalName>unwanted</finalName>
+                            <classifier>unwanted</classifier>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>${maven.install.version}</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
             </plugin>
         </plugins>
     </build>
