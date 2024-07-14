@@ -1,5 +1,6 @@
 package com.mmestre.rijksmuseum.client;
 
+import com.mmestre.rijksmuseum.model.details.CollectionDetailsResponse;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import lombok.Getter;
@@ -14,5 +15,12 @@ public class CollectionDetailsClient extends RestClient {
         Map<String, String> curatedParams = getCuratedParams(parameters);
         RequestSpecification collectionRequest = getReqSpecification();
         response = collectionRequest.queryParams(curatedParams).get(String.format("/api/%s/collection/%s", culture, id));
+    }
+
+    public static CollectionDetailsResponse getResponseAsBean() {
+        if (response == null) {
+            throw new NullPointerException("The CollectionDetailsClient must receive an answer before to get the value as java bean.");
+        }
+        return response.as(CollectionDetailsResponse.class);
     }
 }
