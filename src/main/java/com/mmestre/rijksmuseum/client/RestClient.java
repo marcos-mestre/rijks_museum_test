@@ -29,7 +29,7 @@ class RestClient {
         return RestAssured.given().urlEncodingEnabled(false);
     }
 
-    protected Map<String, String> getCuratedParams(Map<String, String> parameters) {
+    protected Map<String, String> addKeyToTheParams(Map<String, String> parameters) {
         Map<String, String> curatedParams = new HashMap<>();
         curatedParams.put("key", key);
         curatedParams.putAll(parameters);

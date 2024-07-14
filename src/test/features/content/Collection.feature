@@ -1,3 +1,4 @@
+@ContentValidation
 Feature: Collection API
 
   GET /api/[culture]/collection gives access to the collection with brief information about each object. The results are
