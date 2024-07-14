@@ -30,4 +30,4 @@ jobs:
       - name: Build with Maven
         run: mvn -B clean verify
         env: 
-          CUCUMBER_PUBLISH_TOKEN: ${{ CUCUMBER_PUBLISH_TOKEN }}
+          CUCUMBER_PUBLISH_TOKEN: ${{ secrets.CUCUMBER_PUBLISH_TOKEN }}
