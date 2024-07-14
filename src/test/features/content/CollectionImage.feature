@@ -1,3 +1,4 @@
+@ContentValidation
 Feature: Collection Image API
 
   GET /api/[culture]/collection/[object-number]/tiles gives all the information you need to show the image split up in

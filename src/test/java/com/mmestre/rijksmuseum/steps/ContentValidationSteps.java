@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ValidationSteps {
+public class ContentValidationSteps {
     @Then("all the artObjects received in the Collection Response must be made by {string}")
     public void artObjectsMatchesMaker(String expectedMaker) {
         CollectionResponse collectionResponse = CollectionClient.getResponseAsBean();

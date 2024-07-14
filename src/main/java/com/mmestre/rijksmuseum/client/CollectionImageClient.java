@@ -14,9 +14,9 @@ public class CollectionImageClient extends RestClient {
     public static Response response;
 
     public void queryCollectionDetails(String culture, String id, Map<String, String> parameters) {
-        Map<String, String> curatedParams = getCuratedParams(parameters);
+        Map<String, String> paramsWithKey = addKeyToTheParams(parameters);
         RequestSpecification collectionRequest = getReqSpecification();
-        response = collectionRequest.queryParams(curatedParams).get(String.format("/api/%s/collection/%s/tiles", culture, id));
+        response = collectionRequest.queryParams(paramsWithKey).get(String.format("/api/%s/collection/%s/tiles", culture, id));
     }
 
     public static CollectionImageResponse getResponseAsBean() {

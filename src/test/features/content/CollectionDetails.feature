@@ -1,3 +1,4 @@
+@ContentValidation
 Feature: Collection Details API
 
   GET /api/[culture]/collection/[object-number] gives more details of an object. Object numbers can be obtained from the results given in the Collection API.

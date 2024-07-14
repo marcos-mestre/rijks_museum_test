@@ -9,7 +9,7 @@ The test subject is in this case a Rijksmuseum REST api. This API provides acces
 * Museum URL: <https://www.rijksmuseum.nl/nl>
 * Museum API documentation: <https://data.rijksmuseum.nl/object-metadata/api/>
 
-## Technologies
+## Tech stack
 
 The technologies that are being in place in this project to test the API are the following:
 
@@ -18,12 +18,14 @@ The technologies that are being in place in this project to test the API are the
 * [JUnit 5](https://junit.org/junit5/)
 * [RestAssured](https://rest-assured.io/)
 * [Gson](https://github.com/google/gson)
+* [GitHub Actions](https://docs.github.com/en/actions)
+* [Cucumber reports](https://reports.cucumber.io)
 
 ## Tests implemented
 
-Currently only three test cases were implemented, as this exercise is only be designed to show the possibilities, but it is not trying to try to cover all the required scenarios.
+Currently only few test cases were implemented, as this exercise is only be designed to show the possibilities, but it is not trying to try to cover all the required scenarios.
 
-Those 3 scenarios are matching the examples provided by the API documentation at the beginning of July 2024.
+From those, 3 scenarios are matching the examples provided by the API documentation at the beginning of July 2024.
 
 ## Test reports
 

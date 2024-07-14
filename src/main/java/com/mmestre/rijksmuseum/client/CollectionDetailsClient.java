@@ -12,9 +12,9 @@ public class CollectionDetailsClient extends RestClient {
     public static Response response;
 
     public void queryCollectionDetails(String culture, String id, Map<String, String> parameters) {
-        Map<String, String> curatedParams = getCuratedParams(parameters);
+        Map<String, String> paramsWithKey = addKeyToTheParams(parameters);
         RequestSpecification collectionRequest = getReqSpecification();
-        response = collectionRequest.queryParams(curatedParams).get(String.format("/api/%s/collection/%s", culture, id));
+        response = collectionRequest.queryParams(paramsWithKey).get(String.format("/api/%s/collection/%s", culture, id));
     }
 
     public static CollectionDetailsResponse getResponseAsBean() {
