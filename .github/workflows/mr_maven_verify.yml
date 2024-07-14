@@ -29,5 +29,3 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn -B clean verify
-        env: 
-          CUCUMBER_PUBLISH_TOKEN: 27f089ed-4ed3-4a60-b4be-dc2cb9f28263
