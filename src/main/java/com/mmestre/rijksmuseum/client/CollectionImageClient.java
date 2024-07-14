@@ -1,5 +1,7 @@
 package com.mmestre.rijksmuseum.client;
 
+import com.mmestre.rijksmuseum.model.image.CollectionImageResponse;
+import io.restassured.mapper.ObjectMapperType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import lombok.Getter;
@@ -15,5 +17,12 @@ public class CollectionImageClient extends RestClient {
         Map<String, String> curatedParams = getCuratedParams(parameters);
         RequestSpecification collectionRequest = getReqSpecification();
         response = collectionRequest.queryParams(curatedParams).get(String.format("/api/%s/collection/%s/tiles", culture, id));
+    }
+
+    public static CollectionImageResponse getResponseAsBean() {
+        if (response == null) {
+            throw new NullPointerException("The CollectionImageClient must receive an answer before to get the value as java bean.");
+        }
+        return response.as(CollectionImageResponse.class, ObjectMapperType.GSON);
     }
 }
