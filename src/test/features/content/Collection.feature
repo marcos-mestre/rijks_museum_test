@@ -7,5 +7,19 @@ Feature: Collection API
   find out what’s the best query to use.
 
   Scenario: requesting the collection using a specific involvedMaker will return objects only from the chosen agent
-    Given I send a Collection request with the involvedMaker Rembrandt+van+Rijn
+    When I send a Collection request with the involvedMaker Rembrandt+van+Rijn
     Then all the artObjects received in the Collection Response must be made by "Rembrandt van Rijn"
+
+  Scenario: requesting the collection being sort by chronological must return sorted objects
+    When I send a Collection request using the following parameters:
+      | involvedMaker | Vincent+van+Gogh |
+      | ps            | 10               |
+      | s             | chronologic      |
+    Then all the artObjects received in the Collection Response must be sorted out in chronological way
+
+  Scenario: requesting the collection being sort by chronological must return sorted objects
+    When I send a Collection request using the following parameters:
+      | involvedMaker | Vincent+van+Gogh |
+      | ps            | 10               |
+      | s             | achronologic     |
+    Then all the artObjects received in the Collection Response must be sorted out in achronological way

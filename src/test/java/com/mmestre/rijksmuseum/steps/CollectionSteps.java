@@ -6,6 +6,7 @@ import com.mmestre.rijksmuseum.client.CollectionImageClient;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class CollectionSteps {
@@ -21,9 +22,17 @@ public class CollectionSteps {
         new CollectionClient().queryCollectionWithoutKey("nl", parameters);
     }
 
+    @Given("I send a Collection request using the following parameters:")
+    public void collectionWithParametersTable(DataTable table){
+        Map<String,String> tableParameters = table.asMap();
+        String culture = tableParameters.getOrDefault("culture", "nl");
+        Map<String, String> parameters = new HashMap<>(tableParameters);
+        parameters.remove("culture");
+        new CollectionClient().queryCollection(culture, parameters);
+    }
 
     @Given("I send a Collection request without key using the following parameters:")
-    public void collectionWithoutKey(DataTable table) {
+    public void collectionWithParametersTableWithoutKey(DataTable table) {
         Map<String,String> parameters = table.asMap();
         new CollectionClient().queryCollectionWithoutKey("nl", parameters);
     }

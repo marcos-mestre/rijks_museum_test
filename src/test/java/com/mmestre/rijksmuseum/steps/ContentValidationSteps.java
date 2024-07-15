@@ -4,12 +4,16 @@ import com.mmestre.rijksmuseum.client.CollectionClient;
 import com.mmestre.rijksmuseum.client.CollectionDetailsClient;
 import com.mmestre.rijksmuseum.client.CollectionImageClient;
 import com.mmestre.rijksmuseum.model.collection.CollectionResponse;
+import com.mmestre.rijksmuseum.model.common.ArtObject;
 import com.mmestre.rijksmuseum.model.details.CollectionDetailsResponse;
 import com.mmestre.rijksmuseum.model.image.CollectionImageResponse;
 import io.cucumber.java.en.Then;
 import org.junit.jupiter.api.function.Executable;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,5 +44,38 @@ public class ContentValidationSteps {
         assertNotNull(collectionImageResponse.getLevels(), "Then response didn't return a list of levels");
         int imagesReceived = collectionImageResponse.getLevels().size();
         assertTrue(imagesReceived >= minimumImages, String.format("The images received (%s) should be at least %s.", imagesReceived, minimumImages));
+    }
+
+    @Then("all the artObjects received in the Collection Response must be sorted out in {word} way")
+    public void checkArtObjectsSorting(String expectedSortMethod) {
+        CollectionResponse responseAsBean = CollectionClient.getResponseAsBean();
+        assertNotEquals(0, responseAsBean.getArtObjects().size());
+        List<String> retrievedListOfObjectNumbers = responseAsBean.getArtObjects().stream().map(ArtObject::getObjectNumber).toList();
+        List<Long> retrievedListOfSortingDate = new ArrayList<>();
+        retrievedListOfObjectNumbers.forEach(on ->{
+            new CollectionDetailsClient().queryCollectionDetails("nl", on, Map.of());
+            retrievedListOfSortingDate.add(CollectionDetailsClient.getResponseAsBean().getArtObject().getDating().getSortingDate());
+        });
+        List<Long> sortedList;
+        if (expectedSortMethod.equalsIgnoreCase("chronological")){
+            sortedList = sortInChronological(retrievedListOfSortingDate);
+        } else if (expectedSortMethod.equalsIgnoreCase("achronological")){
+            sortedList = sortInAchronological(retrievedListOfSortingDate);
+        } else {
+            throw new UnsupportedOperationException(String.format("The sort method %s has not been implemented yet.", expectedSortMethod));
+        }
+        for (int i = 0; i < retrievedListOfSortingDate.size(); i++) {
+            System.out.printf("ObjectId: %s, retrieved date %s, sorted date: %s",
+                    retrievedListOfObjectNumbers.get(i), retrievedListOfSortingDate.get(i), sortedList.get(i));
+            assertEquals(retrievedListOfSortingDate.get(i).longValue(),sortedList.get(i).longValue(), "The sorted values are not matching.");
+        }
+    }
+
+    private List<Long> sortInChronological(List<Long> inputList){
+        return new ArrayList<>(inputList).stream().sorted().toList();
+    }
+
+    private List<Long> sortInAchronological(List<Long> inputList){
+        return new ArrayList<>(inputList).stream().sorted(Comparator.reverseOrder()).toList();
     }
 }
