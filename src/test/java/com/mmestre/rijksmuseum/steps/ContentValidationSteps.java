@@ -67,7 +67,7 @@ public class ContentValidationSteps {
             throw new UnsupportedOperationException(String.format("The sort method %s has not been implemented yet.", expectedSortMethod));
         }
         for (int i = 0; i < retrievedListOfSortingDate.size(); i++) {
-            log.info("ObjectId: {}, retrieved date {}, sorted date: {}",
+            log.info("ObjectId: {}, retrieved date {}, framework sorted date: {}",
                     retrievedListOfObjectNumbers.get(i), retrievedListOfSortingDate.get(i), sortedList.get(i));
             assertEquals(retrievedListOfSortingDate.get(i).longValue(),sortedList.get(i).longValue(), "The sorted values are not matching.");
         }
