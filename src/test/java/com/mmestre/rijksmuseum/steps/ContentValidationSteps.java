@@ -8,6 +8,7 @@ import com.mmestre.rijksmuseum.model.common.ArtObject;
 import com.mmestre.rijksmuseum.model.details.CollectionDetailsResponse;
 import com.mmestre.rijksmuseum.model.image.CollectionImageResponse;
 import io.cucumber.java.en.Then;
+import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.function.Executable;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Log4j2
 public class ContentValidationSteps {
     @Then("all the artObjects received in the Collection Response must be made by {string}")
     public void artObjectsMatchesMaker(String expectedMaker) {
@@ -65,7 +67,7 @@ public class ContentValidationSteps {
             throw new UnsupportedOperationException(String.format("The sort method %s has not been implemented yet.", expectedSortMethod));
         }
         for (int i = 0; i < retrievedListOfSortingDate.size(); i++) {
-            System.out.printf("ObjectId: %s, retrieved date %s, sorted date: %s",
+            log.info("ObjectId: {}, retrieved date {}, sorted date: {}",
                     retrievedListOfObjectNumbers.get(i), retrievedListOfSortingDate.get(i), sortedList.get(i));
             assertEquals(retrievedListOfSortingDate.get(i).longValue(),sortedList.get(i).longValue(), "The sorted values are not matching.");
         }

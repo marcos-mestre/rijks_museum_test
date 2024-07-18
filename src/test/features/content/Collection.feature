@@ -10,14 +10,14 @@ Feature: Collection API
     When I send a Collection request with the involvedMaker Rembrandt+van+Rijn
     Then all the artObjects received in the Collection Response must be made by "Rembrandt van Rijn"
 
-  Scenario: requesting the collection being sort by chronological must return sorted objects
+  Scenario: requesting the collection being sort by chronological way must return the objects ordered
     When I send a Collection request using the following parameters:
       | involvedMaker | Vincent+van+Gogh |
       | ps            | 10               |
       | s             | chronologic      |
     Then all the artObjects received in the Collection Response must be sorted out in chronological way
 
-  Scenario: requesting the collection being sort by chronological must return sorted objects
+  Scenario: requesting the collection being sort by a-chronological way must return the objects reversely ordered
     When I send a Collection request using the following parameters:
       | involvedMaker | Vincent+van+Gogh |
       | ps            | 10               |
