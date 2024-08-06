@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 class RestClient {
-    protected static final String key = System.getProperty("api.key");
+    protected static final String key = System.getProperty("key");
     private static final String baseUrl = "https://www.rijksmuseum.nl";
     private static volatile boolean initiated;
 
