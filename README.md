@@ -14,7 +14,7 @@ The test subject is in this case a Rijksmuseum REST api. This API provides acces
 The technologies that are being in place in this project to test the API are the following:
 
 * [Cucumber](https://cucumber.io/)
-* [Java 17](https://www.oracle.com/java/technologies/javase/17-relnote-issues.html)
+* [Java 21](https://www.oracle.com/java/technologies/javase/21u-relnotes.html)
 * [JUnit 5](https://junit.org/junit5/)
 * [RestAssured](https://rest-assured.io/)
 * [Gson](https://github.com/google/gson)
