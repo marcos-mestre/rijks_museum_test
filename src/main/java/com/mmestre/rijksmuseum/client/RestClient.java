@@ -3,6 +3,8 @@ package com.mmestre.rijksmuseum.client;
 import io.restassured.RestAssured;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
+import io.restassured.parsing.Parser;
+import io.restassured.specification.RequestLogSpecification;
 import io.restassured.specification.RequestSpecification;
 
 import java.util.HashMap;
@@ -18,6 +20,7 @@ class RestClient {
             synchronized (this) {
                 if (!initiated) {
                     RestAssured.baseURI = baseUrl;
+                    RestAssured.defaultParser = Parser.JSON;
                     RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
                 }
             }
@@ -26,7 +29,9 @@ class RestClient {
     }
 
     protected RequestSpecification getReqSpecification() {
-        return RestAssured.given().urlEncodingEnabled(false);
+        RequestSpecification requestSpecification = RestAssured.given().urlEncodingEnabled(false);
+        RequestLogSpecification log = requestSpecification.log();
+        return log.all();
     }
 
     protected Map<String, String> addKeyToTheParams(Map<String, String> parameters) {
